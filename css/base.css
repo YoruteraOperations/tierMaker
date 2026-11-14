@@ -1,0 +1,124 @@
+/* CSS変数(色・サイズ・余白)、リセット、全体レイアウト。見た目の調整は基本的に :root の値を変えるだけで済む */
+
+:root {
+  color-scheme: dark;
+
+  /* 色 */
+  --bg: #1a1a1a;
+  --surface: #252525;
+  --surface-hover: #303030;
+  --surface-active: #3a3a3a;
+  --board-bg: #1a1a17;
+  --controls-bg: #141414;
+  --line: #000000;
+  --border: #3c3c3c;
+  --text: #e4e4e4;
+  --text-muted: #9a9a9a;
+  --accent: #5a8ed0;
+  --danger: #d06060;
+  --overlay: rgba(0, 0, 0, 0.6);
+  --ghost-bg: rgba(255, 255, 255, 0.12);
+  --label-text-dark: #111111;
+  --label-text-light: #ffffff;
+
+  /* Tierの初期色(S/A/B/C/D)と追加した行の色 */
+  --tier-1: #ff7f7f;
+  --tier-2: #ffbf7f;
+  --tier-3: #ffdf7f;
+  --tier-4: #bfff7f;
+  --tier-5: #7fbfff;
+  --tier-new: #cfcfcf;
+
+  /* 行の設定に並べる色 */
+  --preset-1: #ff7f7f;
+  --preset-2: #ffbf7f;
+  --preset-3: #ffdf7f;
+  --preset-4: #ffff7f;
+  --preset-5: #bfff7f;
+  --preset-6: #7fff7f;
+  --preset-7: #7fffff;
+  --preset-8: #7fbfff;
+  --preset-9: #7f7fff;
+  --preset-10: #ff7fff;
+  --preset-11: #bf7fbf;
+  --preset-12: #cfcfcf;
+
+  /* サイズ */
+  --label-w: 100px;
+  --item-size: 80px;
+  --item-gap: 2px;
+  --row-line: 1px;
+  --controls-w: 80px;
+  --tap: 40px;
+  --label-font: 20px;
+  --label-line-height: 1.2;
+  --label-pad: 4px;
+  --radius: 4px;
+  --page-max: 1200px;
+
+  /* 余白 */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+
+  /* 文字 */
+  --font: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", "Yu Gothic UI", Meiryo, sans-serif;
+  --font-size: 14px;
+  --font-size-small: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+img {
+  display: block;
+}
+
+.main {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: var(--space-4);
+  padding-bottom: calc(var(--space-4) * 6);
+}

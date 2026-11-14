@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1a1a1a">
+  <!-- 画面上の文言は js/text.js が正。title は読み込み前の表示用に同じ値を置いている -->
+  <title>Tier表メーカー</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/tier.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <header class="toolbar">
+    <h1 class="app-title" data-t="appTitle"></h1>
+
+    <div class="list-switch">
+      <select id="list-select" class="list-select" data-t-aria="listSelect"></select>
+      <button type="button" class="icon-btn" id="list-menu-btn" data-action="toggle-list-menu" data-t-aria="listMenu" aria-haspopup="true" aria-expanded="false">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="menu" id="list-menu" hidden>
+        <button type="button" class="menu-item" data-action="new-list" data-t="newList"></button>
+        <button type="button" class="menu-item" data-action="rename-list" data-t="renameList"></button>
+        <button type="button" class="menu-item is-danger" data-action="delete-list" data-t="deleteList"></button>
+      </div>
+    </div>
+
+    <button type="button" class="icon-btn more-btn" id="more-btn" data-action="toggle-tools" data-t-aria="more" aria-haspopup="true" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+    </button>
+
+    <div class="tools" id="tools">
+      <button type="button" class="btn" data-action="add-images" data-t="addImages"></button>
+      <button type="button" class="btn" data-action="add-tier" data-t="addTier"></button>
+      <label class="size-control">
+        <span data-t="imageSize"></span>
+        <input type="range" id="size-range" min="40" max="160" step="4">
+      </label>
+      <button type="button" class="btn" data-action="export-png" data-t="exportPng"></button>
+      <button type="button" class="btn" data-action="export-data" data-t="exportData"></button>
+      <button type="button" class="btn" data-action="import-data" data-t="importData"></button>
+      <button type="button" class="btn" data-action="reset" data-t="reset"></button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="board" id="board"></div>
+
+    <section class="unsorted-wrap">
+      <h2 class="section-title" data-t="unsorted"></h2>
+      <div class="item-list unsorted" id="unsorted" data-container="unsorted"></div>
+    </section>
+  </main>
+
+  <div class="trash" id="trash" data-t-aria="trash">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>
+    <span data-t="trash"></span>
+  </div>
+
+  <div class="drop-overlay" id="drop-overlay" hidden>
+    <span data-t="dropHere"></span>
+  </div>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <input type="file" id="file-input" multiple accept="image/*" hidden>
+  <input type="file" id="data-input" accept=".json,application/json" hidden>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

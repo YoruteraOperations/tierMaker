@@ -1,0 +1,359 @@
+/* ボタン、モーダル、ツールバー、未分類エリア、ゴミ箱、トースト */
+
+/* ボタン */
+.btn {
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+}
+
+.btn:active {
+  background: var(--surface-active);
+}
+
+.btn.is-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn.is-danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text);
+}
+
+.icon-btn:hover {
+  background: var(--surface-hover);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* ツールバー */
+.toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.app-title {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+  margin-right: var(--space-2);
+}
+
+.list-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.list-select {
+  height: var(--tap);
+  max-width: 200px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.more-btn {
+  display: none;
+}
+
+.size-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--tap);
+  padding: 0 var(--space-2);
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.size-control input {
+  width: 110px;
+  accent-color: var(--accent);
+}
+
+/* ドロップダウンメニュー */
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  padding: var(--space-1) 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.menu-item {
+  min-height: var(--tap);
+  padding: 0 var(--space-3);
+  border: 0;
+  background: transparent;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.menu-item:hover {
+  background: var(--surface-hover);
+}
+
+.menu-item.is-danger {
+  color: var(--danger);
+}
+
+/* 未分類エリア */
+.unsorted-wrap {
+  margin-top: var(--space-4);
+}
+
+.section-title {
+  margin-bottom: var(--space-2);
+  font-size: var(--font-size);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.unsorted {
+  min-height: calc(var(--item-size) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--board-bg);
+}
+
+.unsorted:empty {
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.unsorted:empty::before {
+  content: attr(data-empty);
+  color: var(--text-muted);
+  padding: var(--space-4);
+  text-align: center;
+}
+
+/* ゴミ箱(ドラッグ中だけ表示) */
+.trash {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: min(320px, calc(100% - var(--space-4) * 2));
+  height: 64px;
+  transform: translateX(-50%);
+  border: 1px dashed var(--danger);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--danger);
+}
+
+body.is-dragging .trash {
+  display: flex;
+}
+
+/* ドラッグ中の画像がゴミ箱の上にあるとき、その画像(プレースホルダー)はゴミ箱の中へ移るので非表示にする */
+.trash .item {
+  display: none !important;
+}
+
+.trash:has(.item) {
+  background: var(--danger);
+  color: #fff;
+}
+
+/* ページへファイルをドラッグしたときの表示 */
+.drop-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--overlay);
+  border: 2px dashed var(--accent);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* トースト */
+.toasts {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+body.is-dragging .toasts {
+  bottom: calc(var(--space-4) * 2 + 64px);
+}
+
+.toast {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  white-space: nowrap;
+}
+
+/* モーダル */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background: var(--overlay);
+}
+
+.modal {
+  width: 100%;
+  max-width: 360px;
+  max-height: calc(100vh - var(--space-4) * 2);
+  overflow: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.modal-title {
+  margin-bottom: var(--space-3);
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.modal-message {
+  margin-bottom: var(--space-3);
+  white-space: pre-wrap;
+}
+
+.modal-input {
+  width: 100%;
+  height: var(--tap);
+  margin-bottom: var(--space-3);
+  padding: 0 var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.modal-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+/* 行の設定 */
+.tier-settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.field-label {
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-small);
+  color: var(--text-muted);
+}
+
+.color-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.color-input {
+  width: var(--tap);
+  height: var(--tap);
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.swatch {
+  width: var(--tap);
+  height: var(--tap);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.swatch.is-current {
+  outline: 2px solid var(--text);
+  outline-offset: 1px;
+}
+
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.action-list .btn.is-wide {
+  grid-column: 1 / -1;
+}

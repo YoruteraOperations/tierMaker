@@ -1,0 +1,162 @@
+/* Tier行・ラベル・画像エリア */
+
+/* 行どうしの区切り線は、背景(--line)の上に行を gap 分ずらして並べることで出している */
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--row-line);
+  background: var(--line);
+  border: var(--row-line) solid var(--line);
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: var(--label-w) minmax(0, 1fr) var(--controls-w);
+  min-height: max(calc(var(--item-size) + var(--item-gap) * 2), var(--tap));
+  background: var(--board-bg);
+}
+
+/* ラベル。文字は絶対配置の箱の中に置き、行の高さに影響させない */
+.tier-label {
+  position: relative;
+  overflow: hidden;
+  cursor: text;
+  color: var(--label-text-dark);
+}
+
+.tier-label-box {
+  position: absolute;
+  inset: var(--label-pad);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tier-label-text {
+  display: block;
+  max-width: 100%;
+  font-size: var(--label-font);
+  line-height: var(--label-line-height);
+  text-align: center;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  outline: none;
+}
+
+.tier-label-text[contenteditable="true"],
+.tier-label-text[contenteditable="plaintext-only"] {
+  min-width: 1em;
+  cursor: text;
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.tier-label:has(.tier-label-text:focus) {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* 画像を並べるエリア。左から右へ、溢れたら折り返す */
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--item-gap);
+  padding: var(--item-gap);
+  min-height: calc(var(--item-size) + var(--item-gap) * 2);
+}
+
+.item {
+  position: relative;
+  width: var(--item-size);
+  height: var(--item-size);
+  flex: 0 0 auto;
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+.item.is-selected {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* 選択中だけ出る削除ボタン。見た目は小さく、押せる範囲は広めに取る */
+.item-del {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 0 0 0 var(--radius);
+  background: var(--danger);
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-del::after {
+  content: "";
+  position: absolute;
+  inset: -8px -8px -8px -8px;
+}
+
+.item.is-selected .item-del {
+  display: flex;
+}
+
+/* 行右端の操作部(設定・並び替えハンドル) */
+.tier-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--controls-bg);
+}
+
+.tier-controls .icon-btn {
+  color: var(--text-muted);
+}
+
+.tier-handle {
+  cursor: grab;
+  touch-action: none;
+}
+
+/* ドラッグ中の見た目 */
+.item.is-ghost {
+  background: var(--ghost-bg);
+  outline: 2px dashed var(--accent);
+  outline-offset: -2px;
+}
+
+.item.is-ghost img {
+  opacity: 0.25;
+}
+
+.item.is-fallback {
+  opacity: 0.9;
+  cursor: grabbing;
+}
+
+.tier-row.is-ghost {
+  opacity: 0.4;
+}
+
+body.is-dragging,
+body.is-dragging *,
+body.is-dragging-row,
+body.is-dragging-row * {
+  cursor: grabbing !important;
+}

@@ -1,0 +1,18 @@
+# OS
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+._*
+__MACOSX/
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+*~
+
+# その他
+*.bak
+*.log
+.claude/

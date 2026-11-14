@@ -1,0 +1,97 @@
+/* スマホ向け調整(幅600px以下、または横向きで高さの低いタッチ端末) */
+
+@media (max-width: 600px), (max-height: 480px) and (pointer: coarse) {
+  :root {
+    --label-w: 64px;
+    --item-size: 56px;
+    --controls-w: 40px;
+    --label-font: 14px;
+    --label-pad: 2px;
+  }
+
+  .main {
+    padding: var(--space-2);
+    padding-bottom: calc(var(--space-4) * 6);
+  }
+
+  .toolbar {
+    flex-wrap: nowrap;
+    padding: var(--space-1) var(--space-2);
+  }
+
+  .app-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+    margin-right: 0;
+  }
+
+  .list-select {
+    max-width: 120px;
+  }
+
+  .list-switch .menu {
+    left: auto;
+    right: 0;
+  }
+
+  /* ツールバーは「…」メニューにまとめる */
+  .more-btn {
+    display: inline-flex;
+  }
+
+  .tools {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: var(--space-2);
+    left: var(--space-2);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: var(--space-1) 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    max-height: calc(100vh - 64px);
+    overflow: auto;
+  }
+
+  .tools.is-open {
+    display: flex;
+  }
+
+  .tools .btn {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    text-align: left;
+    min-height: 44px;
+  }
+
+  .tools .btn:hover {
+    background: var(--surface-hover);
+  }
+
+  .size-control {
+    padding: 0 var(--space-3);
+    min-height: 44px;
+  }
+
+  .size-control input {
+    flex: 1 1 auto;
+    width: auto;
+  }
+
+  /* 操作部は縦に並べ、行の高さは2ボタン分を確保する */
+  .tier-row {
+    min-height: max(calc(var(--item-size) + var(--item-gap) * 2), calc(var(--tap) * 2));
+  }
+
+  .tier-controls {
+    flex-direction: column;
+  }
+}
